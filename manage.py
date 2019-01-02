@@ -57,17 +57,11 @@ Migrate(app,db)
 #8添加迁移命令
 manager.add_command("db",MigrateCommand)
 
-
-
-
-
-
-
 @app.route('/')
 def index():
-    return
+    return "index"
 
 
 
 if __name__ == '__main__':
-    app.run()
+    manager.run()
