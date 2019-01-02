@@ -5,43 +5,21 @@ from flask_wtf.csrf import CSRFProtect
 from flask_session import Session
 from flask_script import Manager
 from flask_migrate import Migrate,MigrateCommand
+from config import config_dict
 
-#0创建配置类
-class Config(object):
-    """自定义配置类,将配置信息以属性的方式罗列即可"""
-    DEBUG = True
-
-
-
-    # 连接mysql数据库的配置
-    SQLALCHEMY_DATABASE_URI = "mysql://root:mysql@127.0.0.1:3306/news"
-    #开启数据库跟踪模式
-    SQLALCHEMY_TRACK_MODIFICATIONS = True
-
-
-
-    #REDIS 数据库配置信息
-    REDIS_HOST = "127.0.0.1"
-    REDIS_PORT = 6379
-
-    #具体储存到哪个数据库
-    SESSION_TYPE = "redis"
-    SESSION_REDIS = StrictRedis(host=REDIS_HOST, port=REDIS_PORT,db=1)
-    #session储存的数据产生后是否session_id是否需要加密
-    SESSION_USE_SIGNER = True
-    # 是否是永久保存
-    SESSION_PERMANENT = False
-    # 设置过期时长,默认过期时长31天
-    PERMANENT_SESSION_LIFETIME = 86400
 
 app = Flask(__name__)
-app.config.from_object(Config)
+
+#根据development建获取对应的配置类名
+config_class = config_dict["development"]
+
+app.config.from_object(config_class)
 
 #创建mysql数据库对象
 db = SQLAlchemy(app)
 
 #3创建redis数据库对象
-redis_store = StrictRedis(host=Config.REDIS_HOST, port = Config.REDIS_PORT)
+redis_store = StrictRedis(host=config_class.REDIS_HOST, port = config_class.REDIS_PORT)
 
 #4开启CSRF保护机制
 CSRFProtect(app)
