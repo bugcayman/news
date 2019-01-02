@@ -4,6 +4,9 @@ from flask_wtf.csrf import CSRFProtect
 from flask_session import Session
 from config import config_dict
 from flask import Flask
+import logging
+from info.modules.index import index_bp
+
 
 #创建mysql数据库对象
 db = SQLAlchemy()
@@ -33,3 +36,8 @@ def create_app(config_name):
     CSRFProtect(app)
     #5借助session调整flask.session的储存位置到redis中
     Session(app)
+
+    #注册蓝图
+    app.register_blueprint(index_bp)
+
+    return app

@@ -11,12 +11,10 @@ Migrate(app,db)
 
 #8添加迁移命令
 manager.add_command("db",MigrateCommand)
-
 @app.route('/')
 def index():
     redis_store.set("name","laowang")
     return "index"
-
 
 
 if __name__ == '__main__':
