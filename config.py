@@ -41,3 +41,4 @@ config_dict = {
     "development" : DevelopmentConfig,
     "production" : ProductionConfig
 }
+
