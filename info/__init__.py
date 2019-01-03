@@ -4,7 +4,7 @@ from flask_wtf.csrf import CSRFProtect
 from flask_session import Session
 from config import config_dict
 from flask import Flask
-from info.modules.index import index_bp
+
 import logging
 from logging.handlers import RotatingFileHandler
 
@@ -20,7 +20,7 @@ def write_log(config_class):
     # 设置日志的记录等级
     logging.basicConfig(level=config_class.LOG_LEVEL)  # 调试debug级
     # 创建日志记录器，指明日志保存的路径、每个日志文件的最大大小、保存的日志文件个数上限
-    file_log_handler = RotatingFileHandler("logs/log", maxBytes=10, backupCount=10)
+    file_log_handler = RotatingFileHandler("logs/log", maxBytes=1024*1024*100, backupCount=10)
     # 创建日志记录的格式 日志等级 输入日志信息的文件名 行数 日志信息
     formatter = logging.Formatter('%(levelname)s %(filename)s:%(lineno)d %(message)s')
     # 为刚创建的日志记录器设置日志记录格式
@@ -58,6 +58,10 @@ def create_app(config_name):
     Session(app)
 
     #注册蓝图
+    #将蓝图的导入延迟到工厂方法中,能够解决导入循环问题
+
+    from info.modules.index import index_bp
     app.register_blueprint(index_bp)
+
 
     return app
