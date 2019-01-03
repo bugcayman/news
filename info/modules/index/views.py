@@ -4,5 +4,7 @@ from flask import current_app
 
 @index_bp.route('/')
 def index():
+    #使用日志
     current_app.logger.debug("debug")
+
     return "index"

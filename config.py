@@ -1,17 +1,14 @@
 from redis import StrictRedis
+import logging
 
 class Config(object):
     """自定义配置类,将配置信息以属性的方式罗列即可"""
     DEBUG = True
 
-
-
     # 连接mysql数据库的配置
     SQLALCHEMY_DATABASE_URI = "mysql://root:mysql@127.0.0.1:3306/news"
     #开启数据库跟踪模式
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-
-
 
     #REDIS 数据库配置信息
     REDIS_HOST = "127.0.0.1"
@@ -29,11 +26,11 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     """开发模式"""
-    DEBUG = True
+    LOG_LEVEL = logging.DEBUG
 
 class ProductionConfig(Config):
     """线上生产环境"""
-    DEBUG = False
+    LOG_LEVEL = logging.ERROR
 
 #给外界使用提供一个接口
 #使用：config_dict["development"] ---->DevelopmentConfig
