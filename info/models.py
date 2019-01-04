@@ -8,6 +8,7 @@ from . import db
 class BaseModel(object):
     """模型基类，为每个模型补充创建时间与更新时间"""
     create_time = db.Column(db.DateTime, default=datetime.now)  # 记录的创建时间
+
     update_time = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)  # 记录的更新时间
 
 
@@ -22,6 +23,7 @@ tb_user_collection = db.Table(
 tb_user_follows = db.Table(
     "info_user_fans",
     db.Column('follower_id', db.Integer, db.ForeignKey('info_user.id'), primary_key=True),  # 粉丝id
+
     db.Column('followed_id', db.Integer, db.ForeignKey('info_user.id'), primary_key=True)  # 被关注人的id
 )
 
