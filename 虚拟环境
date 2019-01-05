@@ -1,0 +1,24 @@
+当找不到配置文件可以重新配置虚拟环境
+flask虚拟环境安装
+	sudo pip install virtualenv
+	sudo pip install virtualenvwrapper
+1、创建目录用来存放虚拟环境
+	mkdir $HOME/.virtualenvs
+2、打开~/.bashrc文件，并添加如下：
+	export WORKON_HOME=$HOME/.virtualenvs
+	source /usr/local/bin/virtualenvwrapper.sh
+3.运行source ~/.bashrc	
+在python3中，创建虚拟环境
+	mkvirtualenv -p python3 虚拟环境名称
+	例 ：
+	mkvirtualenv -p python3 py3_flask
+4.查看虚拟环境workon 两次tab键  
+5.使用虚拟环境的命令 :workon 虚拟环境
+退出虚拟环境deactivate
+删除虚拟环境rmvirtualenv 虚拟环境名称
+
+五:虚拟环境按下如何安装工具包?
+python3版本下：
+~/.virtualenvs/py3_flask/lib/python3.5/site-packages
+查看虚拟环境中安装的包 :pip freeze
+
