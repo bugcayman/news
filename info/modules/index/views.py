@@ -11,5 +11,5 @@ def index():
 @index_bp.route('/favicon')
 def get_favicon():
     """返回网站图表"""
-    # return current_app.send_static_file("news/favicon.ico")
-    pass
+    return current_app.send_static_file("news/info/static/news/favicon.ico")
+
